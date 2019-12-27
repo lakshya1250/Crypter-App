@@ -73,6 +73,7 @@ background_label.place(relwidth = 1, relheight = 1)
 option = IntVar()
 option.set(0)
 
+# Initializing All The Window
 frame1 = tk.Frame(root, bd = 5, bg = background_color)
 frame1.place(relx = 0.05, rely = 0.05, relwidth = 0.9, relheight = 0.9)
 
