@@ -1,18 +1,22 @@
+# ----- Imports -----
 from cryptography.fernet import Fernet
 from tkinter import messagebox
 from tkinter import *
 import tkinter as tk
 import easygui
 
+# ----- Global Variables ----
 height = 600
 width = 600
 path = None
 background_color = "#40C840"
 
+# ----- Functions -----
 def encrypt(path):
+    """Returns The Encrypted File"""
     key = Fernet.generate_key()
     token = Fernet(key)
-    with open(path, 'r+') as plain_file:
+    with open(path, 'rb+') as plain_file:
         plain_text = bytes(plain_file.read(), "utf-8")  # File data
         cipher_text = str(token.encrypt(plain_text), "utf-8")
         plain_file.seek(0)  # Return to the beginning of the file
@@ -23,7 +27,8 @@ def encrypt(path):
         label2["text"] = "You Have Not Chosen\nAny File Yet."
 
 def decrypt(path):
-    with open(path, 'r+') as cipher_file:
+    """Returns The Decrypted File"""
+    with open(path, 'rb+') as cipher_file:
         cipher_text = cipher_file.read()
         cipher_text, key = str(cipher_text).split("\n\n")
         token = Fernet(key)
@@ -35,6 +40,7 @@ def decrypt(path):
         label2["text"] = "You Have Not Chosen\nAny File Yet."
 
 def choose_file():
+    """Opens The File Choosing Dialog Box"""
     global path
     path = easygui.fileopenbox()
     breakpoint = len(path)//2
@@ -44,6 +50,7 @@ def choose_file():
     print(path)
 
 def crypt():
+    """Redirects To The Appropriate Functions"""
     global path
     global option
     print(path)
@@ -53,9 +60,15 @@ def crypt():
         encrypt(path)        
     else:
         decrypt(path)
+    
+# ----- Main Code -----
 
+# Initializing The Main Tkinter Window
 root = tk.Tk()
+root.title("Encrypter And Decrypter")
 root.geometry(f"{width}x{height}")
+
+# Initializing And Setting The Images                         
 logo_image = tk.PhotoImage(file="Logo.png")
 root.iconphoto(False, logo_image)
 root.iconbitmap("Icon.ico")
@@ -63,8 +76,7 @@ background_image = tk.PhotoImage(file='Background.png')
 background_label = tk.Label(root, image=background_image)
 background_label.place(relwidth=1, relheight=1)
 
-root.title("Encrypter And Decrypter")
-
+# Creating The Main Window
 option = IntVar()
 option.set(0)
 
@@ -95,4 +107,7 @@ label2.place(relx=0.05, rely=0.6, relwidth=0.9, relheight=0.4)
 button2 = tk.Button(topframe, text="Submit",font=("Times New Roman", 18), command=crypt)
 button2.place(relx=0.4, rely=0.85, relwidth=0.2, relheight=0.1)
 
-root.mainloop()
+# ----- Driver Code -----
+if __name__ == "__main__":
+    root.mainloop()
+
