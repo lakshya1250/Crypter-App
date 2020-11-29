@@ -8,7 +8,6 @@ import easygui
 # ----- Global Variables ----
 height = 600
 width = 600
-path = None
 background_color = "#40C840"
 
 # ----- Functions -----
@@ -41,19 +40,11 @@ def decrypt(path):
 
 def choose_file():
     """Opens The File Choosing Dialog Box"""
-    global path
     path = easygui.fileopenbox()
-    breakpoint = len(path)//2
-    label_path = f"{path[0:breakpoint]}\n{path[breakpoint:-1]+path[-1]}"
-    label2["text"] = label_path
-    print(label_path)
-    print(path)
-
-def crypt():
+    label2["text"] = f"{path[0:len(path)//2]}\n{path[len(path)//2:-1]+path[-1]}"
+                         
+def crypt(path, option):
     """Redirects To The Appropriate Functions"""
-    global path
-    global option
-    print(path)
     if path == None:
         messagebox.showerror("File Path Empty", "You Have Not Selected A File Path. Please Select A File Path.")
     if option.get() == 0:
@@ -104,7 +95,7 @@ button1.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.4)
 label2 = tk.Label(fileframe, text="You Have Not Chosen\nAny File Yet.", bg=background_color, fg="black", font=("Times New Roman", 18))
 label2.place(relx=0.05, rely=0.6, relwidth=0.9, relheight=0.4)
 
-button2 = tk.Button(topframe, text="Submit",font=("Times New Roman", 18), command=crypt)
+button2 = tk.Button(topframe, text="Submit",font=("Times New Roman", 18), command=lambda:crypt(path, option))
 button2.place(relx=0.4, rely=0.85, relwidth=0.2, relheight=0.1)
 
 # ----- Driver Code -----
