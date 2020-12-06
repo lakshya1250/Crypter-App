@@ -80,22 +80,22 @@ labelframe.place(relx=0.1, rely=0.07, relwidth=0.8, relheight=0.3)
 label = tk.Label(labelframe, text="Select What Do You Want To Do?", bg=background_color, fg="black", font=("Times New Roman", 18))
 label.place(relx=0.01, rely=0.01, relwidth=0.98, relheight=0.3)
 
-option1 = tk.Radiobutton(labelframe, text="Encryption", variable=option, value="0", font=("Times New Roman", 18))
+option1 = tk.Radiobutton(labelframe, text="Encryption", variable=option, value="0", font=("Times New Roman", 18), cursor="hand2")
 option1.place(relx=0.1, rely=0.31, relwidth=0.8, relheight=0.3)
 
-option2 = tk.Radiobutton(labelframe, text="Decryption", variable=option, value="1", font=("Times New Roman", 18))
+option2 = tk.Radiobutton(labelframe, text="Decryption", variable=option, value="1", font=("Times New Roman", 18), cursor="hand2")
 option2.place(relx=0.1, rely=0.61, relwidth=0.8, relheight=0.3)
 
 fileframe = tk.Frame(topframe, bd=5, bg=background_color, relief=GROOVE)
 fileframe.place(relx=0.1, rely=0.4, relwidth=0.8, relheight=0.4)
 
-button1 = tk.Button(fileframe, text="Choose A File",font=("Times New Roman", 18), command=choose_file)
+button1 = tk.Button(fileframe, text="Choose A File",font=("Times New Roman", 18), command=choose_file, cursor="hand2")
 button1.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.4)
 
 label2 = tk.Label(fileframe, text="You Have Not Chosen\nAny File Yet.", bg=background_color, fg="black", font=("Times New Roman", 18))
 label2.place(relx=0.05, rely=0.6, relwidth=0.9, relheight=0.4)
 
-button2 = tk.Button(topframe, text="Submit",font=("Times New Roman", 18), command=lambda:crypt(path, option))
+button2 = tk.Button(topframe, text="Submit",font=("Times New Roman", 18), command=lambda:crypt(path, option), cursor="hand2")
 button2.place(relx=0.4, rely=0.85, relwidth=0.2, relheight=0.1)
 
 # ----- Driver Code -----
